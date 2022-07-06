@@ -8,19 +8,23 @@ import { HomeComponent } from './home.component';
 import { OverviewComponent } from './overview/overview.component';
 import { ItemsComponent } from './items/items.component';
 import { ItemComponent } from './items/item/item.component';
-import { storeName } from './store/home.selectors';
-import { reducer } from './store/home.reducer';
+import { storeName } from './store/landing.selectors';
+import { landingReducer } from './store/landing.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { HomeEffects } from './store/home.effects';
+import { LandingEffects } from './store/landing.effects';
 import { DecimalPipe } from './pipe/decimal.pipe';
 const routes: Routes = [{
     path: 'landing',
     component: HomeComponent,
-    children: [
-        {
-            path: '',
-            component: OverviewComponent,
-        }
+    children: [{
+        path: '',
+        redirectTo: 'overview',
+        pathMatch: 'full'
+    }
+        , {
+        path: 'overview',
+        component: OverviewComponent,
+    }
     ],
 }];
 
@@ -36,11 +40,9 @@ const routes: Routes = [{
     imports: [
         CommonModule,
         FormsModule,
-        HttpClientModule,
         RouterModule.forChild(routes),
-        StoreModule.forRoot({}),
-        StoreModule.forFeature(storeName, reducer),
-        EffectsModule.forRoot([HomeEffects]),
+        StoreModule.forFeature(storeName, landingReducer),
+        EffectsModule.forFeature([LandingEffects]),
     ]
 })
 export class HomeModule { }

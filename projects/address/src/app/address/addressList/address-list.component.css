@@ -2,7 +2,6 @@
   margin: 10px;
   height: auto;
   width: 280px;
-  /* border: 2px solid green; */
   padding: 10px;
   border-radius: 10px;
 }
@@ -19,6 +18,11 @@
   display: flex;
   justify-content: center;
   cursor: pointer;
+  box-shadow: rgb(72, 50, 72) 1px 1px 1px 1px;
+}
+
+.address-new > span{
+  font-size: 88px;
 }
 
 .red-color{
@@ -28,3 +32,6 @@
 .green-color{
   box-shadow: green 1px 1px 1px 1px;;
 }
+
+
+

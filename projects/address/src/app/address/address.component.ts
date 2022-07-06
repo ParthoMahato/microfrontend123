@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-//import * as fromApp from '../../store/app.reducer';
 import { Address } from '../home.model';
-import * as HomeActions from './store/home.actions';
-import { selectAddress, selectPinCodeSummary } from './store/home.selectors';
-import * as fromAddress from '../address/store/home.reducer';
+import * as HomeActions from './store/address.actions';
+import { selectAddress, selectLoading, selectPinCodeSummary } from './store/address.selectors';
+import * as fromAddress from './store/address.reducer';
 
 @Component({
   selector: 'app-address',
@@ -19,6 +18,7 @@ export class AddressComponent implements OnInit {
   disabledFlag: boolean = true;
   addressList!: Address[];
   addressCreationMode: boolean = false;
+  isLoading:boolean = false;
 
   get additionalAddressControls() {
     return (this.addressForm.get('address.addressLine') as FormArray).controls;
@@ -32,8 +32,11 @@ export class AddressComponent implements OnInit {
     this.fetchPinCodeDetails();
     this.store.select(selectAddress).subscribe(address => {
       this.addressList = address;
-      console.log('AddressList', this.addressList);
     });
+    this.store.select(selectLoading).subscribe(loading => {
+      this.isLoading = loading;
+    });
+
   }
 
   initialForm() {
@@ -96,7 +99,6 @@ export class AddressComponent implements OnInit {
   onSubmit() {
     let listOfAddress: Address[] = [];
     listOfAddress = [...this.addressList, this.addressForm.value];
-    console.log('listOfAddress' + listOfAddress);
     this.store.dispatch(
       HomeActions.saveAddressStart({ listOfAddress: listOfAddress })
     );

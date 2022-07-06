@@ -3,13 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { OverviewComponent } from './home/overview/overview.component';
 const routes: Routes = [{
-  path: 'home',
+  path: '',
+  redirectTo: 'landing',
+  pathMatch: 'full'
+},
+{
+  path: 'landing',
   component: HomeComponent,
   children: [
-      {
-          path: '',
-          component: OverviewComponent,
-      }
+    {
+      path: '',
+      redirectTo: 'overview',
+      pathMatch: 'full'
+    },
+    {
+      path: 'overview',
+      component: OverviewComponent,
+    }
   ],
 }];
 

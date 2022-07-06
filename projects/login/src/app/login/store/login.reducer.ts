@@ -10,7 +10,7 @@ export interface State {
 }
 
 export const initialState: State = {
-  user: new User("","","", new Date()),
+  user: {} as User,
   errorMsg: "",
   loading: false
 };
@@ -41,5 +41,5 @@ export const reducer = createReducer(
     ...state,
     loading: true
   })),
-  on(LoginActions.logout, state => ({ ...state, user: new User("","","", new Date()), }))
+  on(LoginActions.logout, state => ({ ...state, user: {} as User, }))
 );

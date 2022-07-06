@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { LoginService } from './login.service';
 import * as fromLogin from './store/login.reducer';
 import * as LoginActions from './store/login.actions';
 import { selectErrorMsg, selectLoading } from './store/login.selectors';
@@ -14,11 +12,9 @@ import { selectErrorMsg, selectLoading } from './store/login.selectors';
 })
 export class LoginComponent implements OnInit {
   isLoginMode: boolean = true;
-  errorMessage: string | null = null;
+  errorMessage: string = "";
   isLoading: boolean = false;
   constructor(
-    private router: Router,
-    private loginService: LoginService,
     private store: Store<fromLogin.State>
   ) { }
 
@@ -55,7 +51,7 @@ export class LoginComponent implements OnInit {
   }
 
   onClose() {
-    this.errorMessage = null;
+    this.errorMessage = "";
     this.store.dispatch(LoginActions.clearErrorMessage());
   }
 }

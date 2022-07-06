@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { LoginModule } from './login/login.module';
 import { AppRoutingModule } from './app.routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,6 +15,9 @@ import { AppRoutingModule } from './app.routing.module';
     BrowserModule,
     LoginModule,
     AppRoutingModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

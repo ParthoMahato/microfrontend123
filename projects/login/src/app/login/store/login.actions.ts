@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ErrorMessage, SignUp } from '../login.interface';
+import { SignUp } from '../login.interface';
 
 export const LOGIN_START = '[Login Page]  Login Start';
 export const LOGIN_SUCCESS = '[Login Page] Login Success';
@@ -9,8 +9,11 @@ export const CLEAR_ERR_MSG = '[Login Page] Clear error message';
 export const LOGOUT = '[Login Page] logout';
 export const TEST_START = "[Login Page] test start";
 
-export const testStart = createAction(TEST_START, props<{ name: string }>());
+// Test global store call;
+export const INCREMENT = "[Shell Page] increment";
 
+
+export const testStart = createAction(TEST_START, props<{ name: string }>());
 
 export const loginStart = createAction(LOGIN_START, props<SignUp>());
 export const loginSuccess = createAction(
@@ -32,3 +35,9 @@ export const failure = createAction(
 
 export const clearErrorMessage = createAction(CLEAR_ERR_MSG);
 export const logout = createAction(LOGOUT);
+
+
+// Test
+export const increment = createAction(INCREMENT, props<{ add: number }>());
+
+

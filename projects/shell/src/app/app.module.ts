@@ -10,27 +10,35 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app.routing.module';
-import { CounterComponent } from './counter/counter.component';
-import { storeName } from './counter/store/counter.selectors';
-import { hostCounterReducer } from './counter/store/counter.reducer';
-import { HttpClientModule } from '@angular/common/http';
+import { storeName } from './store/shell.selectors';
+import { hostReducer } from './store/shell.reducer';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { EffectsModule } from '@ngrx/effects';
+import { ShellEffect } from './store/shell.effects';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    HeaderComponent,
-    CounterComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
     StoreModule.forRoot({}),
-    StoreModule.forFeature(storeName,hostCounterReducer)
+    EffectsModule.forRoot([]),
+    StoreModule.forFeature(storeName, hostReducer),
+    EffectsModule.forFeature([ShellEffect]),
+    AppRoutingModule,
+
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

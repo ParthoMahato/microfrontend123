@@ -12,9 +12,7 @@ export class ItemsComponent implements OnInit {
   @Output() addToCart = new EventEmitter<Item>();
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.itemList);
-  }
+  ngOnInit() {}
 
   addToCartItems(item: Item | undefined) {
     this.addToCart.emit(item);

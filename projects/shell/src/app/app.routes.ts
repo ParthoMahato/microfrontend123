@@ -3,8 +3,6 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 //import { NotFoundComponent } from './not-found/not-found.component';
 import { startsWith, WebComponentWrapper, WebComponentWrapperOptions } from '@angular-architects/module-federation-tools';
-import { CounterComponent } from './counter/counter.component';
-//import { DashboardComponent } from './dashboard/dashboard.component';
 
 let URL = 'http://localhost:3000/remoteEntry.js';
 
@@ -16,57 +14,57 @@ export const APP_ROUTES: Routes = [
   }, 
   {
     path: 'login',
-    loadChildren: () => {
-      return loadRemoteModule({
-        remoteEntry: 'https://microfrontend123-login.vercel.app/remoteEntry.js',
+    loadChildren: async () => {
+      const m = await loadRemoteModule({
+        remoteEntry: 'http://10.0.221.198/login/remoteEntry.js',
         remoteName: 'login',
         exposedModule: './LoginModule'
-      })
-        .then(m => m.LoginModule)
+      });
+      return m.LoginModule;
     }
   },
   {
     path: 'home',
-    loadChildren: () => {
-      return loadRemoteModule({
-        remoteEntry: 'http://localhost:5001/remoteEntry.js',
+    loadChildren: async () => {
+      const m = await loadRemoteModule({
+        remoteEntry: 'http://10.0.221.198/landing/remoteEntry.js',
         remoteName: 'landing',
         exposedModule: './HomeModule'
-      })
-        .then(m => m.HomeModule)
+      });
+      return m.HomeModule;
     }
   },
   {
     path: 'home/cart',
-    loadChildren: () => {
-      return loadRemoteModule({
+    loadChildren: async () => {
+      const m = await loadRemoteModule({
         remoteEntry: 'http://localhost:5002/remoteEntry.js',
         remoteName: 'mycart',
         exposedModule: './CartModule'
-      })
-        .then(m => m.CartModule)
+      });
+      return m.CartModule;
     }
   },
   {
     path: 'home/order',
-    loadChildren: () => {
-      return loadRemoteModule({
+    loadChildren: async () => {
+      const m = await loadRemoteModule({
         remoteEntry: 'http://localhost:5003/remoteEntry.js',
         remoteName: 'orders',
         exposedModule: './OrdersModule'
-      })
-        .then(m => m.OrderModule)
+      });
+      return m.OrderModule;
     }
   },
   {
     path: 'home/address',
-    loadChildren: () => {
-      return loadRemoteModule({
+    loadChildren: async () => {
+      const m = await loadRemoteModule({
         remoteEntry: 'http://localhost:5004/remoteEntry.js',
         remoteName: 'address',
         exposedModule: './AddressModule'
-      })
-        .then(m => m.AddressModule)
+      });
+      return m.AddressModule;
     }
   },
   // Your route here:

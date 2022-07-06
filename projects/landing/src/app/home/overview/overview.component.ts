@@ -3,18 +3,19 @@ import { Store } from '@ngrx/store';
 import { filter, take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Item } from '../home.model';
-import * as fromHome from '../store/home.reducer'
-//import * as fromApp from '../../store/app.reducer';
-// selectLoading
+import * as fromLanding from '../store/landing.reducer'
+
 import {
   selectAllItems,
   selectCartItems,
-} from '../store/home.selectors';
-import * as HomeActions from '../store/home.actions';
+  selectLoading,
+} from '../store/landing.selectors';
+import * as HomeActions from '../store/landing.actions';
 
 @Component({
   selector: 'app-overview',
-  templateUrl: './overview.component.html'
+  templateUrl: './overview.component.html',
+  styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent {
   itemList!: Item[];
@@ -23,13 +24,11 @@ export class OverviewComponent {
   isLoading: boolean = false;
 
   constructor(
-    private store: Store<fromHome.State>
+    private store: Store<fromLanding.State>
   ) { }
 
   ngOnInit() {
     this.store.dispatch(HomeActions.fetchItemsStart());
-    //this.store.dispatch(HomeActions.fetchAddressStart());
-
     this.store
       .select(selectAllItems)
       .pipe(filter((allItems: any) => !!allItems))
@@ -42,9 +41,9 @@ export class OverviewComponent {
         });
       });
 
-    // this.store.select(selectLoading).subscribe(isLoading => {
-    //   this.isLoading = isLoading;
-    // });
+    this.store.select(selectLoading).subscribe(isLoading => {
+      this.isLoading = isLoading;
+    });
   }
 
   addToCartHome(item: Item) {

@@ -1,6 +1,24 @@
-<address-list *ngIf="!addressCreationMode" [addressList]="addressList" (newAddress)="createNewAddress()"></address-list>
+<div class="spinner_overlay" *ngIf="isLoading">
+  <div class="loader">
+    <div class="inner1"></div>
+    <div class="inner2"></div>
+    <div class="inner3"></div>
+    <div class="inner4"></div>
+  </div>
+  <div class="loader1">
+    <div class="p">L</div>
+    <div class="a" style="margin-top: 50px;">O</div>
+    <div class="r">A</div>
+    <div class="t" style="margin-top: 50px;">D</div>
+    <div class="h">I</div>
+    <div class="o" style="margin-top: 50px;">N</div>
+    <div class="m">G</div>
+  </div>
+</div>
 
-<div class="address-container" *ngIf="addressCreationMode">
+<address-list *ngIf="!isLoading && !addressCreationMode" [addressList]="addressList" (newAddress)="createNewAddress()">
+</address-list>
+<div class="address-container" *ngIf="!isLoading && addressCreationMode">
   <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="form-group col-xs-6">
@@ -14,34 +32,34 @@
     </div>
     <hr>
     <div formGroupName="address" class="row">
-      <div style="text-align:center;text-decoration:underline;font-size:25px">Address</div>
+      <div class="address">Address</div>
       <div class="form-group col-xs-12">
         <label for="">Pin Code</label>
         <input type="text" class="form-control" id="pin" formControlName="pin">
       </div>
-      <div class="form-group col-xs-11" style="padding-right:0px">
+      <div class="form-group col-xs-11 no-padding-right">
         <label for="">Area</label>
-        <select name="area" id="area"  formControlName="area" class="form-control col-xs-10">
+        <select name="area" id="area" formControlName="area" class="form-control col-xs-10">
           <option value="">Select area</option>
           <option *ngFor="let area of areas">{{area}}</option>
         </select>
       </div>
-      <div class="form-group col-xs-1" style="padding-right:0px;padding-left:0;padding-top:27px;">
+      <div class="form-group col-xs-1" class="new-address">
         <div class="plus" (click)="addNewAddressLine()">+</div>
       </div>
       <div class="form-group col-xs-12" formArrayName="addressLine">
         <div *ngFor="let control of additionalAddressControls;let i = index" [formGroupName]='i'
-          style="margin-bottom:20px">
+          class="additional-address">
           <input type="text" formControlName="addressLine" class="form-control">
         </div>
       </div>
       <div class="form-group col-xs-6">
         <label for="">State</label>
-        <input class="form-control" id="state" formControlName="state" [attr.disabled] = "disabledFlag" >
+        <input class="form-control" id="state" formControlName="state" [attr.disabled]="disabledFlag">
       </div>
       <div class="form-group  col-xs-6">
         <label for="">City</label>
-        <input class="form-control" id="city" formControlName="city" [attr.disabled] = "disabledFlag">
+        <input class="form-control" id="city" formControlName="city" [attr.disabled]="disabledFlag">
       </div>
     </div>
     <hr>

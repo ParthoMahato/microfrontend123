@@ -13,3 +13,12 @@ export class User {
     return this._token;
   }
 }
+
+export interface AuthResponseData {
+  idToken: string;
+  email: string;
+  refreshToken: string;
+  expiresIn: string;
+  localId: string;
+  registered?: boolean;
+}

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { selectUser, State } from './reducer.details';
-// import * as fromApp from '../store/app.reducer';
-// import * as LoginActions from '../login/store/login.actions';
+import * as ShellActions from '../store/shell.actions';
+import { Observable, Subscription } from 'rxjs';
+import {  globalState } from '../store/shell.selectors';
+import { filter, last, map, take, takeLast } from 'rxjs/operators';
+import { LoginState } from '../store/globalState';
 
 @Component({
   selector: 'cart-header',
@@ -12,20 +15,29 @@ import { selectUser, State } from './reducer.details';
 })
 export class HeaderComponent implements OnInit {
   loggedInUser: boolean = false;
-  errorMessage = null;
- constructor(private router: Router, private store: Store<State>) {}
+  errorMessage: string = "";
+  counter$!: Observable<number>;
+  counterSubscription$!: Subscription;
+  test$!: Observable<LoginState>;
+  testSubscription$ !:Subscription; 
+  constructor(private router: Router, private store: Store<globalState>) { }
   ngOnInit() {
-    // this.store.select(selectUser).subscribe(user => {
-    //   if (!!user) {
-    //     this.loggedInUser = true;
-    //   } else {
-    //     this.loggedInUser = false;
-    //   }
-    // });
+    this.store.select((state: globalState) => state).subscribe(
+      (state: globalState) => {
+        if (state['login-reducer']) {
+          
+          if (Object.keys(state['login-reducer'].user).length > 0) {
+            this.loggedInUser = true;
+          } else {
+            this.loggedInUser = false;
+          }
+        }
+      }
+    );
   }
 
   logout() {
-    // this.store.dispatch(LoginActions.logout());
-    // this.router.navigate(['./login']);
+    this.store.dispatch(ShellActions.logout());
+    this.router.navigate(['./login']);
   }
 }

@@ -1,19 +1,19 @@
 <div class="header-container">
   <div class="header-text">
-    <a type="button" routerLink="/">Fresh Cart</a>
+    <a type="button" routerLink="/home/landing">Fresh Cart</a>
   </div>
-  <!-- *ngIf="loggedInUser" -->
-  <div class="header-navigation" >
+  
+  <div class="header-navigation" *ngIf="loggedInUser">
     <div class="dropdown">
       <a class="dropdown-toggle" type="button" data-toggle="dropdown">Partho
         <span class="caret"></span></a>
       <ul class="dropdown-menu">
-        <li><a type="button" routerLink="/home/order/orders">My Orders</a></li>
-        <li><a type="button" routerLink="/home/address/address">Manage Address</a></li>
+        <li><a type="button" routerLink="/home/order">My Orders</a></li>
+        <li><a type="button" routerLink="/home/address">Manage Address</a></li>
       </ul>
     </div>
     <div>
-      <a type="button" routerLink="/home/cart/mycart">Cart</a>
+      <a type="button" routerLink="/home/cart">Cart</a>
     </div>
     <div>
       <a type="button" (click)="logout()">Logout</a>

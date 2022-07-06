@@ -5,8 +5,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { SignUp } from '../login.interface';
-import { AuthResponseData } from '../login.service';
-import { User } from '../user.model';
+//import { AuthResponseData } from '../login.service';
+import { User , AuthResponseData} from '../user.model';
 import * as LoginActions from './login.actions';
 
 const handleAuthentication = (
@@ -118,6 +118,17 @@ export class LoginEffect {
           if (action.redirect) {
             this.router.navigate(['/home/landing']);
           }
+        })
+      ),
+    { dispatch: false }
+  );
+
+  test = createEffect(
+    () =>
+      this.action$.pipe(
+        ofType(LoginActions.increment),
+        tap(action => {
+          console.log(action);
         })
       ),
     { dispatch: false }

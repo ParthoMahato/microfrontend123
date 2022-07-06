@@ -8,17 +8,17 @@ import {
   Item,
   OrderSummary
 } from '../home.model';
-//import * as fromApp from '../../store/app.reducer';
+
 import {
   selectAddress,
   selectCalculation,
   selectCartItems,
   selectLoading,
   selectOrders
-} from './store/home.selectors';
-import * as HomeActions from './store/home.actions';
+} from './store/cart.selectors';
+import * as HomeActions from './store/cart.actions';
 import { take } from 'rxjs/operators';
-import * as fromCart from '../cart/store/home.reducer';
+import * as fromCart from './store/cart.reducer';
 
 @Component({
   selector: 'cart-page',
@@ -52,7 +52,6 @@ export class CartComponent implements OnInit {
 
     this.store.select(selectAddress).subscribe(address => {
       this.addressList = address;
-      // console.log(this.addressList);
     });
 
     this.store.select(selectLoading).subscribe(isLoading => {

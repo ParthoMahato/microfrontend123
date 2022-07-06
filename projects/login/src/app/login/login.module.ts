@@ -27,13 +27,10 @@ const routes: Routes = [{
     imports: [
         CommonModule,
         FormsModule,
-        HttpClientModule,
         LoginRoutingModule,
         RouterModule.forChild(routes),
-        StoreModule.forRoot({}),
         StoreModule.forFeature(storeName, reducer),
-        StoreModule.forFeature(CounterStoreName, hostCounterReducer),
-        EffectsModule.forRoot([LoginEffect]),
+        EffectsModule.forFeature([LoginEffect]),
     ]
 })
 export class LoginModule { }

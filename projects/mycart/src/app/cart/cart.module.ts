@@ -9,12 +9,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { CartComponent } from './cart.component';
 import { CartSummaryComponent } from './cartSummary/cart-summary.component';
 import { CartItemscomponent } from './cartItems/cart-items.component';
-import { storeName } from './store/home.selectors';
-import { reducer } from './store/home.reducer';
-import { HomeEffects } from './store/home.effects';
+import { storeName } from './store/cart.selectors';
+import { cartReducer } from './store/cart.reducer';
+import { CartEffects } from './store/cart.effects';
 import { DecimalPipe } from './pipe/decimal.pipe';
 const routes: Routes = [{
-    path: 'mycart',
+    path: '',
     component: CartComponent,
     pathMatch: 'full'
 }];
@@ -29,11 +29,9 @@ const routes: Routes = [{
     imports: [
         CommonModule,
         FormsModule,
-        HttpClientModule,
         RouterModule.forChild(routes),
-        StoreModule.forRoot({}),
-        StoreModule.forFeature(storeName, reducer),
-        EffectsModule.forRoot([HomeEffects]),
+        StoreModule.forFeature(storeName, cartReducer),
+        EffectsModule.forFeature([CartEffects]),
     ]
 })
 export class CartModule { }

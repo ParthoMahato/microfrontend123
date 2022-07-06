@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 //import * as fromApp from '../../store/app.reducer';
 import { OrderSummary } from '../home.model';
-import * as HomeActions from './store/home.actions';
-import { selectLoading, selectOrders } from './store/home.selectors';
-import * as fromOrder from './store/home.reducer';
+import * as HomeActions from './store/orders.actions';
+import { selectLoading, selectOrders } from './store/orders.selectors';
+import * as fromOrder from './store/orders.reducer';
 
 @Component({
   selector: 'app-orders',
@@ -13,13 +13,12 @@ import * as fromOrder from './store/home.reducer';
 })
 export class OrdersComponent implements OnInit {
   orderList!: OrderSummary[];
-  isLoading: boolean = false;
+  isLoading: boolean = true;
   constructor(private store: Store<fromOrder.State>) {}
 
   ngOnInit() {
     this.store.dispatch(HomeActions.fetchOrdersStart());
     this.store.select(selectOrders).subscribe(value => {
-      console.log('Order' + value);
       this.orderList = value;
     });
 

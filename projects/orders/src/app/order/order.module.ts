@@ -7,12 +7,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 
 import { OrdersComponent } from './orders.component';
-import { storeName } from './store/home.selectors';
-import { reducer } from './store/home.reducer';
-import { HomeEffects } from './store/home.effects';
+import { storeName } from './store/orders.selectors';
+import { ordersReducer } from './store/orders.reducer';
+import { OrdersEffects } from './store/orders.effects';
 
 const routes: Routes = [{
-    path: 'orders',
+    path: '',
     component: OrdersComponent,
     pathMatch: 'full'
 }];
@@ -24,11 +24,9 @@ const routes: Routes = [{
     imports: [
         CommonModule,
         FormsModule,
-        HttpClientModule,
         RouterModule.forChild(routes),
-        StoreModule.forRoot({}),
-        StoreModule.forFeature(storeName, reducer),
-        EffectsModule.forRoot([HomeEffects]),
+        StoreModule.forFeature(storeName, ordersReducer),
+        EffectsModule.forFeature([OrdersEffects]),
     ]
 })
 export class OrderModule { }

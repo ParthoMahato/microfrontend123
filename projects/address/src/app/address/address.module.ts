@@ -8,12 +8,12 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { AddressComponent } from './address.component';
 import { AddressListComponent } from './addressList/address-list.component';
-import { storeName } from './store/home.selectors';
-import { reducer } from './store/home.reducer';
-import { HomeEffects } from './store/home.effects';
+import { storeName } from './store/address.selectors';
+import { addressReducer } from './store/address.reducer';
+import { AddressEffects } from './store/address.effects';
 
 const routes: Routes = [{
-    path: 'address',
+    path: '',
     component: AddressComponent,
     pathMatch: 'full'
 }];
@@ -27,11 +27,9 @@ const routes: Routes = [{
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpClientModule,
         RouterModule.forChild(routes),
-        StoreModule.forRoot({}),
-        StoreModule.forFeature(storeName, reducer),
-        EffectsModule.forRoot([HomeEffects]),
+        StoreModule.forFeature(storeName, addressReducer),
+        EffectsModule.forFeature([AddressEffects]),
     ]
 })
 export class AddressModule { }
