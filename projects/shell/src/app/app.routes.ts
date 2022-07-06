@@ -16,7 +16,7 @@ export const APP_ROUTES: Routes = [
     path: 'login',
     loadChildren: async () => {
       const m = await loadRemoteModule({
-        remoteEntry: 'http://10.0.221.198/login/remoteEntry.js',
+        remoteEntry: 'https://microfrontend123-login.vercel.app/remoteEntry.js',
         remoteName: 'login',
         exposedModule: './LoginModule'
       });
@@ -60,7 +60,7 @@ export const APP_ROUTES: Routes = [
     path: 'home/address',
     loadChildren: async () => {
       const m = await loadRemoteModule({
-        remoteEntry: 'http://localhost:5004/remoteEntry.js',
+        remoteEntry: 'https://microfrontend123-address.vercel.app/remoteEntry.js',
         remoteName: 'address',
         exposedModule: './AddressModule'
       });
