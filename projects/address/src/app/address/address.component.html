@@ -1,0 +1,54 @@
+<address-list *ngIf="!addressCreationMode" [addressList]="addressList" (newAddress)="createNewAddress()"></address-list>
+
+<div class="address-container" *ngIf="addressCreationMode">
+  <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <label for="">Name</label>
+        <input type="text" id="name" formControlName="name" class="form-control">
+      </div>
+      <div class="form-group  col-xs-6">
+        <label for="">Mobile Phone</label>
+        <input type="tele" class="form-control" id="phone" formControlName="phone">
+      </div>
+    </div>
+    <hr>
+    <div formGroupName="address" class="row">
+      <div style="text-align:center;text-decoration:underline;font-size:25px">Address</div>
+      <div class="form-group col-xs-12">
+        <label for="">Pin Code</label>
+        <input type="text" class="form-control" id="pin" formControlName="pin">
+      </div>
+      <div class="form-group col-xs-11" style="padding-right:0px">
+        <label for="">Area</label>
+        <select name="area" id="area"  formControlName="area" class="form-control col-xs-10">
+          <option value="">Select area</option>
+          <option *ngFor="let area of areas">{{area}}</option>
+        </select>
+      </div>
+      <div class="form-group col-xs-1" style="padding-right:0px;padding-left:0;padding-top:27px;">
+        <div class="plus" (click)="addNewAddressLine()">+</div>
+      </div>
+      <div class="form-group col-xs-12" formArrayName="addressLine">
+        <div *ngFor="let control of additionalAddressControls;let i = index" [formGroupName]='i'
+          style="margin-bottom:20px">
+          <input type="text" formControlName="addressLine" class="form-control">
+        </div>
+      </div>
+      <div class="form-group col-xs-6">
+        <label for="">State</label>
+        <input class="form-control" id="state" formControlName="state" [attr.disabled] = "disabledFlag" >
+      </div>
+      <div class="form-group  col-xs-6">
+        <label for="">City</label>
+        <input class="form-control" id="city" formControlName="city" [attr.disabled] = "disabledFlag">
+      </div>
+    </div>
+    <hr>
+    <div>
+      <button class="btn btn-success" type="submit" [disabled]="!addressForm.valid">Submit</button> |
+      <button class="btn btn-success" type="button" (click)="onReset()">Clear</button> |
+      <button class="btn btn-success" type="button" (click)="addressCreationMode=false">Back</button>
+    </div>
+  </form>
+</div>

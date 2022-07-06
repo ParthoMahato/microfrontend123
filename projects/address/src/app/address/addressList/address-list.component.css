@@ -1,0 +1,30 @@
+.address-list-container {
+  margin: 10px;
+  height: auto;
+  width: 280px;
+  /* border: 2px solid green; */
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.address-card {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 15px;
+  justify-content: space-around;
+  font-family: cursive;
+}
+
+.address-new {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.red-color{
+  box-shadow: red 1px 1px 1px 1px;;
+}
+
+.green-color{
+  box-shadow: green 1px 1px 1px 1px;;
+}

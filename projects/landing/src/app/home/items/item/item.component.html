@@ -1,0 +1,15 @@
+<div class="item-container" highlightSelected [ngStyle]="{boxShadow: getColor()}">
+  <div class="img-container ">
+    <img [src]="item.image" alt="" class="img-responsive" style="max-height:80px;">
+  </div>
+  <div style="font-size: 20px;text-align: center;">{{item.title}}</div>
+  <hr style="margin-top: 10px;">
+  <!-- <div>{{item.amount | doubleDecimal | currency:'INR'}}</div> -->
+  <div style="display: flex;justify-content:space-between;margin-bottom:10px;">
+    <span>{{item.amount | doubleDecimal | currency:'INR'}}</span>
+    <span>{{item.qty}}</span>
+  </div>
+  <div class="add-to-cart">
+    <button type="button" class="btn btn-primary" [ngStyle]="{backgroundColor: getBtnColor()}" (click)="toCart(item)">Add to cart</button>
+  </div>
+</div>

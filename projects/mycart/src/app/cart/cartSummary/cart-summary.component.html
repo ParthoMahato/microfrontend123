@@ -1,0 +1,46 @@
+<div>
+  <div style="text-align: center;
+  font-size: 20px;">Delivery Address</div>
+  <hr>
+
+  <div class="col-xs-12" style="padding-left: 0px;padding-right: 0px;">
+    <div class="col-xs-8" style="padding-left: 0px;padding-right: 0px;">
+      <div>Address: {{selectedAddress.address.area}}</div>
+      <div *ngIf="selectedAddress.address.addressLine && selectedAddress.address.addressLine.length > 0">
+        <span *ngFor="let newLine of selectedAddress.address.addressLine">{{newLine.addressLine}}</span>
+      </div>
+      <div>City: {{selectedAddress.address.city}}</div>
+      <div>State: {{selectedAddress.address.state}}</div>
+      <div>Pincode: {{selectedAddress.address.pin}}</div>
+    </div>
+    <div class="col-xs-4" style="padding-left: 0px;padding-right: 0px;">
+      <select name="addressList" id="addressLIst" class="form-control" (change)="updateDeliveryAddress($event)">
+        <option *ngFor="let address of addressList">{{address.address.pin}}</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div style="text-align: center;
+  font-size: 20px;">Price Details</div>
+  <hr>
+  <div class="cart-line-items">
+    <div>Price({{cartSummary.totalItem}})</div>
+    <div>{{cartSummary.total | doubleDecimal | currency:'INR'}}</div>
+  </div>
+  <div class="cart-line-items">
+    <div>Delivery Charges</div>
+    <div>{{cartSummary.deliveryCharge | doubleDecimal | currency:'INR'}}</div>
+  </div>
+  <div class="cart-line-items">
+    <div>GST</div>
+    <div>{{cartSummary.gst | doubleDecimal | currency:'INR'}}</div>
+  </div>
+  <hr>
+  <div class="cart-line-items">
+    <div>Total</div>
+    <div>{{cartSummary.finalPrice | doubleDecimal | currency:'INR'}}</div>
+  </div>
+  <hr>
+  <button class="btn btn-success" type="button" style="font-size:15px" (click)="placeOrder()">Place Order</button>
+</div>
