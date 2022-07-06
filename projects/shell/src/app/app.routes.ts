@@ -27,7 +27,7 @@ export const APP_ROUTES: Routes = [
     path: 'home',
     loadChildren: async () => {
       const m = await loadRemoteModule({
-        remoteEntry: 'http://10.0.221.198/landing/remoteEntry.js',
+        remoteEntry: 'https://microfrontend123-landing.vercel.app/remoteEntry.js',
         remoteName: 'landing',
         exposedModule: './HomeModule'
       });
