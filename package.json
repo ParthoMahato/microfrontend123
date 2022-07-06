@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href /microfrontend && ng build address && ng build landing && ng build login && ng build mycart && ng build orders",
+    "build": "ng build",
     "build:prod:all": "ng build --base-href /microfrontend && ng build --configuration production --project=address && ng build --configuration production --project=landing && ng build --configuration production --project=login && ng build --configuration production --project=mycart && ng build --configuration production --project=orders",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
