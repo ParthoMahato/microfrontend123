@@ -18,7 +18,7 @@ export const APP_ROUTES: Routes = [
     path: 'login',
     loadChildren: () => {
       return loadRemoteModule({
-        remoteEntry: 'https://microfrontend123.vercel.app/login/remoteEntry.js',
+        remoteEntry: 'https://microfrontend123-login.vercel.app/remoteEntry.js',
         remoteName: 'login',
         exposedModule: './LoginModule'
       })
